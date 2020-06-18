@@ -1,0 +1,132 @@
+/* Dimensions for desktop */
+@media only screen and (min-width: 800px){
+    body {
+        --bar_top_height: 45px;
+        --content_width: 800px;
+        --bottom_height: 80px;
+        --content_side_padding: 70px;
+        --image_width: 100%;
+        --img_side_padding: 0;
+    }
+}
+
+/* Dimensions for tablets */
+@media only screen and (min-width: 600px) and (max-width: 800px){
+    body {
+        --bar_top_height: 45px;
+        --content_width: 100%;
+        --bottom_height: 40px;
+        --content_side_padding: 10%;
+        --image_width: 80%;
+        --img_side_padding: 10%;
+    }
+}
+
+
+/* Dimensions for smartphones */
+@media only screen and (max-width: 600px){
+    body {
+        --bar_top_height: 45px;
+        --content_width: 100%;
+        --bottom_height: 40px;
+        --content_side_padding: 5%;
+        --image_width: 100%;
+        --img_side_padding: 0;
+    }
+}
+
+body {margin: 0px;}
+
+#main_grid {
+    display: grid;
+    grid-template-columns: 1fr var(--content_width) 1fr;
+    grid-template-rows: 1fr var(--bottom_height);
+    grid-template-areas: 
+        'left center right'
+        'bottom bottom bottom';
+    padding-top: var(--bar_top_height);
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+}
+
+#top_bar {
+    grid-area: bar;
+    width: 100%;
+    height: var(--bar_top_height);
+    border-style: none none solid none;
+    border-bottom-color: rgb(129, 125, 125);
+    border-bottom-width: 1px ;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: white;
+    z-index: 1;
+}
+
+#top_bar p{
+    margin: 5px auto auto auto;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+#bottom {
+    grid-area: bottom;
+    text-align: center;
+}
+
+#right {
+    grid-area: right;
+    /* border-style: solid; */
+
+}
+
+#left {
+    grid-area: left;
+    /* border-style: solid; */
+}
+
+#article_content {
+    grid-area: center;
+    /* border-style: solid;    */
+}
+
+#article_image {
+    position: relative;
+    left:  var(--img_side_padding);
+    right: var(--img_side_padding);
+    max-width: var(--image_width);
+    z-index: 0;
+}
+
+#article_content p,  #article_content h1{
+    padding: 0 var(--content_side_padding) 0 var(--content_side_padding);
+}
+
+#header p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: small;
+}
+
+#deck {
+    font-weight: 10;
+    font-size: 10px;
+}
+
+#main_text {
+    font-size: 20px;
+}
+
+#article_meta p{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: rgb(117, 111, 111);
+    font-size: 13px;
+}
+
+#like_button_container {
+    width: 100px;
+    height: 100px;
+    border-style: solid;
+}
