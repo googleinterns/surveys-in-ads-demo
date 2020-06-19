@@ -6,10 +6,21 @@
         <link rel="stylesheet" href="public/css/style.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script src="public/scripts/ad_scripts.js"></script>
     </head>
     <body>
         <div class="main_region sticky" id="top_bar">
             <p>Generic News Website</p>
+        </div>
+        <div id="banner">
+            <div id="banner-ad">
+                <script>
+                  googletag.cmd.push(function() {
+                    googletag.display('banner-ad');
+                  });
+                </script>
+            </div>
         </div>
         <div id="main_grid">
             <div class="main_region" id="left"></div>
@@ -89,7 +100,8 @@
                 </div>
         
             </div>
-            <div  class="main_region" id="right"></div>
+            <div  class="main_region" id="right">
+            </div>
             <div  class="main_region" id="bottom">
                 <p>
                     Survey in ads pub demo.
