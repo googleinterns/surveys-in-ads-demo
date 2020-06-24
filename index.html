@@ -4,14 +4,16 @@
         <meta charset="utf-8">
         <title>Survey in ads pub demo</title>
         <link rel="stylesheet" href="public/css/style.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="public/css/flyoutMenu.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         <script src="public/scripts/ad_scripts.js"></script>
     </head>
     <body>
         <div class="main_region sticky" id="top_bar">
-            <p>Generic News Website</p>
+            <div id="menu_container">
+            </div> 
+            <p id="page_name"><a href="index.html">Generic News Website</a></p>   
         </div>
         <div id="banner">
             <div id="banner-ad">
@@ -23,7 +25,15 @@
             </div>
         </div>
         <div id="main_grid">
-            <div class="main_region" id="left"></div>
+            <div class="main_region" id="left">
+                <div id="left-ad">
+                    <script>
+                        googletag.cmd.push(function() {
+                          googletag.display('left-ad');
+                        });
+                      </script>
+                </div>
+            </div>
             <div class="main_region" id="article_content">
                 <div id="header">
                     <p>
@@ -110,9 +120,8 @@
         </div>
         
         
-        <div id="like_button_container"></div>
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-        <script src="scripts/index.js"></script>
+        <script src="public/scripts/menu.js"></script>
   </body>
 </html> 
