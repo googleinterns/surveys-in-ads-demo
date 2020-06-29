@@ -3,26 +3,26 @@
 
 #menu_container {
     width: 80px;
-    height: var(--bar_top_height);
+    height: 100%;
     order: 10;
     z-index: 500;
-
 }
 
 #menu_button {
+    width: var(--menu_button_width);
+    height: var(--menu_button_height);
+    position: relative;
+    margin-top: calc(var(--bar_top_height) * .15);
+    margin-left: calc(var(--bar_top_height) * .15);
+    transition: background-color .2s;
     
-    width: 100%;
-    height: 100%;
-    grid-area: menu;
-    margin: auto;
-    font-family: 'Verdana';
-    border-style: hidden;
-    border-right: 10px, solid, rgb(129, 125, 125);
+
 }
 
 #menu_button:hover {
     cursor: pointer;
-    color: rgb(68, 63, 63);
+    background-color: rgb(233, 233, 233);
+    border-radius: 15%;
 }
 
 #menu_button:active {
@@ -32,7 +32,7 @@
 #flyoutMenu {
     width: var(--flyoutmenu_width);
     height: 100vh;
-    background-color: rgb(250, 250, 250);
+    background-color: white;
     position: fixed;
     top: 0;
     left: 0;
@@ -41,7 +41,10 @@
     overflow: scroll;
     z-index: 1000;
     margin: 0;
-    border: 100px, solid, black;
+    border-right: solid;
+    border-color: grey;
+    border-width: 1px;
+    text-align: center;
   }
    
   #flyoutMenu.hide {
@@ -57,18 +60,21 @@
   #flyoutMenu a {
     position: relative;
     display: inline-block;
-    color: #333;
+    color: rgb(145, 145, 145);
     text-decoration: none;
     width: 100%;
     height: var(--pages_buttons_height);
     font-family: 'Verdana';
     text-justify: center;
-    padding-left: 10px;
+    transition: color .1s, background-color .1s, font-weight .1s;
+    padding-bottom: 5px;
     
   }
    
   #flyoutMenu a:hover {
-    background-color: rgb(136, 136, 136);
+    color: black;
+    /* background-color: rgb(233, 233, 233); */
+    font-weight: 550;
   }
 
   #close_button_container {
@@ -79,12 +85,18 @@
     height: var(--pages_buttons_height);
   }
 
-  #close_button_container button {
+  #close_menu_button {
     position: inline-block;
     margin: auto 5px auto auto;
-    height: 30px;
-    width: 30px;
+    height: var(--close_button_size);
+    width:  var(--close_button_size);
+    padding: 10px;
+  }
 
-    
+  #close_menu_button:hover {
+    cursor: pointer;
+    transition: background-color .2s;
+    background-color: rgb(233, 233, 233);
+    border-radius: 15%;
   }
 
