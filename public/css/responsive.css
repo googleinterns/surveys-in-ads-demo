@@ -6,9 +6,12 @@
         --content_side_padding: 70px;
         --image_width: 100%;
         --img_side_padding: 0;
-        --flyoutmenu_width: 300px;
+        --flyoutmenu_width: 230px;
         --pages_buttons_height: 40px;
         --title_size: 30px;
+        --close_button_size: 15px;
+        --menu_button_width: 40px;
+        --menu_button_height: 70%;
     }
 }
 
@@ -24,6 +27,9 @@
         --flyoutmenu_width: 250px;
         --pages_buttons_height: 40px;
         --title_size: 30px;
+        --close_button_size: 15px;
+        --menu_button_width: 40px;
+        --menu_button_height: 70%;
     }
 }
 
@@ -39,5 +45,8 @@
         --flyoutmenu_width: 100vw;
         --pages_buttons_height: 40px;
         --title_size: 20px;
+        --close_button_size: 15px;
+        --menu_button_width: 40px;
+        --menu_button_height: 70%;
     }
 }
