@@ -42,14 +42,12 @@ body {margin: 0px;}
     z-index: 1;
     font-size: var(--title_size);
     text-align: center;
-    
 }
 
 #page_name a {
     text-decoration: none;
     color: black;
 }
-
 
 #bottom {
     grid-area: bottom;
@@ -58,7 +56,6 @@ body {margin: 0px;}
 
 #right {
     grid-area: right;
-
 }
 
 #left {
@@ -121,6 +118,3 @@ body {margin: 0px;}
     width: 300px; 
     height: 250px;
 }
-
-
-
