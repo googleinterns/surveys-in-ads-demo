@@ -15,8 +15,6 @@
     margin-top: calc(var(--bar_top_height) * .15);
     margin-left: calc(var(--bar_top_height) * .15);
     transition: background-color .2s;
-    
-
 }
 
 #menu_button:hover {
@@ -36,8 +34,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    transition: transform .3s
-                cubic-bezier(0, .52, 0, 1);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
     overflow: scroll;
     z-index: 1000;
     margin: 0;
@@ -68,7 +65,6 @@
     text-justify: center;
     transition: color .1s, background-color .1s, font-weight .1s;
     padding-bottom: 5px;
-    
   }
    
   #flyoutMenu a:hover {

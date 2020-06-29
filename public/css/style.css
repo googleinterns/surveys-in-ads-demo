@@ -50,7 +50,6 @@ body {margin: 0px;}
     color: black;
 }
 
-
 #bottom {
     grid-area: bottom;
     text-align: center;
@@ -58,7 +57,6 @@ body {margin: 0px;}
 
 #right {
     grid-area: right;
-
 }
 
 #left {
@@ -121,6 +119,3 @@ body {margin: 0px;}
     width: 300px; 
     height: 250px;
 }
-
-
-
