@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.10.1"
   }
 }
