@@ -69,12 +69,16 @@ body {margin: 0px;}
     grid-area: center;
 }
 
-#article_image {
+#article_content img {
     position: relative;
     left:  var(--img_side_padding);
     right: var(--img_side_padding);
     max-width: var(--image_width);
     z-index: 0;
+}
+.video {
+    width: 560; 
+    height: 315p;
 }
 
 #article_content p,  #article_content h1{
