@@ -7,56 +7,75 @@
     tools:context=".ui.slideshow.SlideshowFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <FrameLayout
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
                 android:id="@+id/row0col0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
-            <FrameLayout
+                android:layout_width="150sp"
+                android:layout_height="150sp"></ImageButton>
+
+            <ImageButton
                 android:id="@+id/row0col1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
-            
+                android:layout_width="150sp"
+                android:layout_height="150sp"></ImageButton>
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <FrameLayout
+            android:layout_height="150sp"
+            android:orientation="horizontal">
+
+            <ImageButton
                 android:id="@+id/row1col0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
-            <FrameLayout
+                android:layout_width="150sp"
+                android:layout_height="150sp"></ImageButton>
+
+            <ImageButton
                 android:id="@+id/row1col1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
+                android:layout_width="150dp"
+                android:layout_height="150sp"
+
+                ></ImageButton>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <FrameLayout
+            android:layout_height="150sp"
+            android:orientation="horizontal">
+
+            <ImageButton
                 android:id="@+id/row2col0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
-            <FrameLayout
+                android:layout_width="150sp"
+                android:layout_height="150sp"></ImageButton>
+
+            <ImageButton
                 android:id="@+id/row2col1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </FrameLayout>
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                app:layout_constraintStart_toStartOf="parent"
+                ></ImageButton>
 
         </LinearLayout>
-        
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/restartButton"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        android:text="Restart"
+        android:textSize="25sp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

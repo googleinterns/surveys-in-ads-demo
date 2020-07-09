@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.slideshow.cards.Cat01Fragment">
+    tools:context=".ui.slideshow.cards.Dog01Fragment">
 
     <ImageButton
         android:layout_width="150sp"
         android:layout_height="150sp"
-        android:src="@drawable/cat"
+        android:src="@drawable/dog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-        
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
