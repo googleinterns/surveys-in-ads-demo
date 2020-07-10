@@ -1,82 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.slideshow.SlideshowFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="40sp">
+                <LinearLayout
+                    android:id="@+id/layout_lives_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:orientation="horizontal">
+                </LinearLayout>
+            </HorizontalScrollView>
 
-            <ImageButton
-                android:id="@+id/row0col0"
-                android:layout_width="150sp"
-                android:layout_height="150sp" />
 
-            <ImageButton
-                android:id="@+id/row0col1"
-                android:layout_width="150sp"
-                android:layout_height="150sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/row0col0"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150sp"
-            android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/row0col1"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp" />
 
-            <ImageButton
-                android:id="@+id/row1col0"
-                android:layout_width="150sp"
-                android:layout_height="150sp" />
+            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/row1col1"
-                android:layout_width="150dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="150sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/row1col0"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp" />
+
+                <ImageView
+                    android:id="@+id/row1col1"
+                    android:layout_width="150dp"
+                    android:layout_height="150sp"
+
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/row2col0"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp" />
+
+                <ImageView
+                    android:id="@+id/row2col1"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf = "parent"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/restartButton"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="Restart"
+                android:textSize="25sp"
+                />
+            <Button
+                android:id="@+id/showButton"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="Show Cards"
+                android:textSize="25sp"
+                app:layout_constraintTop_toTopOf="parent"
 
                 />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150sp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/row2col0"
-                android:layout_width="150sp"
-                android:layout_height="150sp" />
-
-            <ImageButton
-                android:id="@+id/row2col1"
-                android:layout_width="150sp"
-                android:layout_height="150sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf = "parent"/>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/restartButton"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:layout_marginBottom="671dp"
-            android:text="Restart"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout" />
-
-    </LinearLayout>
+    </ScrollView>
 
 
-</RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
