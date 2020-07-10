@@ -1,35 +1,46 @@
 package com.example.surveyspubdemoapp.ui.slideshow;
 
+import android.content.Context;
 import android.media.Image;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.example.surveyspubdemoapp.R;
+import com.example.surveyspubdemoapp.ui.Dialog;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 
-import static androidx.core.graphics.drawable.IconCompat.getResources;
 
-public class Game extends Thread {
-    public static int lives;
-    public static ImageView turnedCard;
-    public static int pairsLeft;
+public class Game {
+    private Integer lives = 3;
+    private ImageView turnedCard;
+    private  Integer pairsLeft;
+    private Context context;
+    private Integer nRows = 3;
+    private Integer nCols = 2;
+    private View root;
+    private HashMap<Integer, Integer> cardsImg;
 
-    public void run(View root) {
-        Game.lives = 3;
-        Game.turnedCard = null;
-        int nRows = 3;
-        int nCols = 2;
-        Game.pairsLeft = nRows * nCols / 2;
+    public Game(Context context, View root){
+        this.context = context;
+        this.root = root;
+    }
 
-
+//    Add listeners to cards and do initial shuffling
+    public void run() {
+        turnedCard = null;
+        pairsLeft = nRows * nCols / 2;
         for (int row = 0; row < nRows; row += 1) {
             for (int col = 0; col < nCols; col += 1){
-                int cardId = contgetResources().getIdentifier("row" + row + "col" + col, "id",
+                int cardId = context.getResources().getIdentifier("row" + row + "col" + col, "id",
                         "com.example.surveyspubdemoapp.ui.slideshow");
                 root.findViewById(cardId).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -39,60 +50,97 @@ public class Game extends Thread {
                 });
             }
         }
-
-
+        int restartId = this.context.getResources().getIdentifier("restartButton", "id",
+                "com.example.surveyspubdemoapp.ui.slideshow");
+        root.findViewById(restartId).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                restartGame();
+            }
+        });
+        shuffleCards();
+        startLoop();
     }
 
-    private void onImgClickHandler(View button){
-        if (Game.turnedCard == null) {
-            Game.turnedCard = button;
+    private void restartGame(){
+        turnedCard = null;
+        pairsLeft = nRows * nCols / 2;
+        lives = 3;
+        shuffleCards();
+        startLoop();
+    }
+
+    private void startLoop(){
+        while(lives > 0  && pairsLeft > 0){
+        }
+        if (lives == 0) {
+            openDialog("No lives left!", "Click the restart button to play again");
+        }
+        if (pairsLeft == 0) {
+            openDialog("Congrats!", "You've won!");
+        }
+    }
+
+
+    private void onImgClickHandler(View v){
+        ImageButton button = (ImageButton) v;
+        button.setImageResource(cardsImg.get(button.getId()));
+        int backCard = context.getResources().getIdentifier("article_image", "drawable",
+                context.getPackageName());
+        if (turnedCard == null) {
+            turnedCard = button;
             return;
         }
-        if (Game.turnedCard.toString() != button.toString()) {
-            Game.lives -= 1;
-            Game.turnedCard = null;
+        if (!cardsImg.get(turnedCard.getId()).equals(cardsImg.get(button.getId()))) {
+            lives -= 1;
+            turnedCard = null;
+            button.setImageResource(backCard);
+            turnedCard.setImageResource(backCard);
             return;
         }
-        Field imgField = R.drawable.class.getDeclaredField("article_image");
-        int imgId = imgField.getInt(null);
-        button.setImageResource(imgId);
-        Game.turnedCard.setImageResource(imgId);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onOpenedCardClickHandler(v);
             }
         });
-
-        Game.turnedCard = null;
-        Game.pairsLeft -= 1;
+        turnedCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOpenedCardClickHandler(v);
+            }
+        });
+        turnedCard = null;
+        pairsLeft -= 1;
     }
 
-    private void onOpenedCardClickHandler(View button){
-        return;
+    private void onOpenedCardClickHandler(View v){
+        openDialog("Don't worry about this one", "You've already turned this card!");
     }
 
-    private void shuffleCards(View root) {
+    private void shuffleCards() {
         int nRows = 3;
         int nCols = 2;
-        int nPictures = nRows * nCols;
-        LinkedList<String> pictures = new LinkedList(Arrays.asList("cat", "cat",
+        LinkedList<String> pictures = (LinkedList <String>) (Arrays.asList("cat", "cat",
                 "dog", "dog", "dolphin", "dolphin"));
         Collections.shuffle(pictures);
+        int backCardImage = context.getResources().getIdentifier("article_image",
+                "drawable", context.getPackageName());
         for (int row = 0; row < nRows; row += 1) {
             for (int col = 0; col < nCols; col += 1){
-                int cardId = getResources().getIdentifier("row" + row + "col" + col, "id",
+                int cardId = this.context.getResources().getIdentifier("row" + row + "col" + col, "id",
                         "com.example.surveyspubdemoapp.ui.slideshow");
-                int imgId;
-                try {
-                    Field imgField = R.drawable.class.getDeclaredField(pictures.pop());
-                    imgId = imgField.getInt(null);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    imgId = 0;
-                }
+                int imgId = context.getResources().getIdentifier(pictures.pop(), "drawable",
+                        context.getPackageName());
+                cardsImg.put(cardId, imgId);
                 ImageButton button = root.findViewById(cardId);
-                button.setImageResource(imgId);
+                button.setImageResource(backCardImage);
             }
         }
+    }
+
+    private void openDialog(String title, String message){
+        Dialog dialog = new Dialog(title, message);
+        dialog.show(((FragmentActivity) this.context).getSupportFragmentManager(), "example dialog");
     }
 }
