@@ -1,5 +1,6 @@
 package com.example.surveyspubdemoapp.ui.slideshow;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.media.Image;
 import android.nfc.Tag;
@@ -19,16 +20,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Handler;
 
 
 public class Game {
     private static final int LIVES = 3;
-    private Integer mLives = 3;
+    private static final int ROWS = 3;
+    private static final int COLS = 2;
+    private static final long DELAY = 1000;
+    private Integer mLives;
     private ImageView mTurnedCard;
     private Integer mPairsLeft;
     private Context mContext;
-    private Integer nRows = 3;
-    private Integer nCols = 2;
     private View mRoot;
     private HashMap<Integer, Integer> mCardsImg;
 
@@ -41,19 +44,9 @@ public class Game {
     public void run() {
         mCardsImg = new HashMap<>();
         mTurnedCard = null;
-        mPairsLeft = nRows * nCols / 2;
-        for (int row = 0; row < nRows; row += 1) {
-            for (int col = 0; col < nCols; col += 1){
-                int cardId =mContext.getResources().getIdentifier("row" + row + "col" + col, "id",
-                        mContext.getPackageName());
-                mRoot.findViewById(cardId).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v){
-                        onImgClickHandler(v);
-                    }
-                });
-            }
-        }
+        mPairsLeft = ROWS * COLS / 2;
+        mLives = LIVES;
+        enableCards();
         setLives();
         int restartId = mContext.getResources().getIdentifier("restartButton", "id",
                 mContext.getPackageName());
@@ -74,12 +67,27 @@ public class Game {
         shuffleCards();
     }
 
+    private void enableCards(){
+        for (int row = 0; row < ROWS; row += 1) {
+            for (int col = 0; col < COLS; col += 1){
+                int cardId =mContext.getResources().getIdentifier("row" + row + "col" + col, "id",
+                        mContext.getPackageName());
+                mRoot.findViewById(cardId).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                        onImgClickHandler(v);
+                    }
+                });
+            }
+        }
+    }
+
     private void restartGame(){
         mTurnedCard = null;
-        mPairsLeft = nRows * nCols / 2;
+        mPairsLeft = ROWS * COLS / 2;
         mLives = 3;
-        for (int row = 0; row < nRows; row += 1) {
-            for (int col = 0; col < nCols; col += 1){
+        for (int row = 0; row < ROWS; row += 1) {
+            for (int col = 0; col < COLS; col += 1){
                 int cardId =mContext.getResources().getIdentifier("row" + row + "col" + col, "id",
                         mContext.getPackageName());
                 mRoot.findViewById(cardId).setOnClickListener(new View.OnClickListener() {
@@ -97,7 +105,9 @@ public class Game {
         shuffleCards();
     }
 
-    private void onImgClickHandler(View v){
+    public void onImgClickHandler(View v){
+//        ObjectAnimator animatorTurned = new ObjectAnimator.();
+//        ObjectAnimator animatorNewCard = new ObjectAnimator()
         ImageView button = (ImageView) v;
         button.setImageResource(mCardsImg.get(button.getId()));
         int backCard = mContext.getResources().getIdentifier("ic_emoji", "drawable",
@@ -111,11 +121,13 @@ public class Game {
             return;
         }
         if (!mCardsImg.get(mTurnedCard.getId()).equals(mCardsImg.get(button.getId()))) {
+//            killCards();
+            button.postDelayed(new HideCard(button), DELAY);
+            mTurnedCard.postDelayed(new HideCard(mTurnedCard), DELAY);
+//            mRoot.postDelayed(new EnableCards(this), DELAY);
             mLives -= 1;
             dropLife();
-            mTurnedCard.setImageResource(backCard);
             mTurnedCard = null;
-            button.setImageResource(backCard);
             checkEndGame();
             return;
         }
@@ -146,8 +158,8 @@ public class Game {
         Collections.shuffle(pictures);
         int backCardImage = mContext.getResources().getIdentifier("ic_emoji",
                 "drawable", mContext.getPackageName());
-        for (int row = 0; row < nRows; row += 1) {
-            for (int col = 0; col < nCols; col += 1){
+        for (int row = 0; row < ROWS; row += 1) {
+            for (int col = 0; col < COLS; col += 1){
                 int cardId = mContext.getResources().getIdentifier("row" + row + "col" + col, "id",
                         mContext.getPackageName());
                 int imgId = mContext.getResources().getIdentifier(pictures.pop(), "drawable",
@@ -162,8 +174,8 @@ public class Game {
     }
 
     private void showCards() {
-        for (int row = 0; row < nRows; row += 1) {
-            for (int col = 0; col < nCols; col += 1){
+        for (int row = 0; row < ROWS; row += 1) {
+            for (int col = 0; col < COLS; col += 1){
                 int cardId = mContext.getResources().getIdentifier("row" + row + "col" + col, "id",
                         mContext.getPackageName());
                 ImageView button = mRoot.findViewById(cardId);
@@ -195,8 +207,8 @@ public class Game {
     }
 
     private void killCards(){
-        for (int row = 0; row < nRows; row += 1) {
-            for (int col = 0; col < nCols; col += 1){
+        for (int row = 0; row < ROWS; row += 1) {
+            for (int col = 0; col < COLS; col += 1){
                 int cardId =mContext.getResources().getIdentifier("row" + row + "col" + col, "id",
                         mContext.getPackageName());
                 mRoot.findViewById(cardId).setOnClickListener(new View.OnClickListener() {
@@ -227,6 +239,22 @@ public class Game {
     private void dropLife(){
         View heart = mRoot.findViewWithTag("heart" + mLives);
         heart.setVisibility(View.INVISIBLE);
+    }
+
+    public long getRows(){
+        return ROWS;
+    }
+
+    public long getCols(){
+        return COLS;
+    }
+
+    public Context getContext(){
+        return mContext;
+    }
+
+    public View getRoot(){
+        return mRoot;
     }
 }
 
