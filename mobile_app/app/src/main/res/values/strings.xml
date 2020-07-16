@@ -11,4 +11,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_game">Game</string>
+    <string name="easy_text">Beginner</string>
+    <string name="medium_text">Experienced</string>
+    <string name="hard_text">Veteran</string>
 </resources>
