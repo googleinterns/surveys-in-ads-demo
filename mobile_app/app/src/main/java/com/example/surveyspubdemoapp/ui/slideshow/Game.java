@@ -21,11 +21,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.surveyspubdemoapp.R;
+import com.example.surveyspubdemoapp.ui.AdActivity;
 import com.example.surveyspubdemoapp.ui.Dialog;
 import com.example.surveyspubdemoapp.ui.Tuple;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +42,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Handler;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 
 public class Game {
@@ -54,6 +61,17 @@ public class Game {
     private View mRoot;
     private HashMap<Integer, Integer> mCardsImg;
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+    private RewardedAdLoadCallback mAdLoadCallback = new RewardedAdLoadCallback() {
+        @Override
+        public void onRewardedAdLoaded() {
+            // Ad successfully loaded.
+        }
+
+        @Override
+        public void onRewardedAdFailedToLoad(int errorCode) {
+            // Ad failed to load.
+        }
+    };
 
 
     public Game(Context context, View root){
@@ -104,6 +122,11 @@ public class Game {
     }
 
     private void restartGame(){
+        if (((AdActivity) mContext).mInterstitialAds[0].isLoaded()) {
+            ((AdActivity) mContext).mInterstitialAds[0].show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
         mTurnedCard = null;
         mPairsLeft = mRows * mCols / 2;
         mLives = 3;
@@ -222,7 +245,7 @@ public class Game {
         if (mLives == 0){
             openDialog("You've lost :(",
                     "Press restart to play again, good luck next time");
-            killCards();
+            ((AdActivity) mContext).mRewardedAds[0].loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
             return;
         }
 
@@ -301,89 +324,29 @@ public class Game {
     }
 
     private void createCards(){
-        ConstraintLayout cardsSpace = mRoot.findViewWithTag("cards_space");
-//        LinearLayout cardsSpace = mRoot.findViewWithTag("cards_space");
+        LinearLayout cardsSpace = mRoot.findViewWithTag("cards_space");
         cardsSpace.removeAllViews();
-//        constraintRow.clone(cardsSpace);
-        int cardBackgroundId = mContext.getResources().getIdentifier("card_background",
-                "drawable", mContext.getPackageName());
-        Drawable cardBackground = ContextCompat.getDrawable(mContext, cardBackgroundId);
-        int rowBackgroundId = mContext.getResources().getIdentifier("row_background",
-                "drawable", mContext.getPackageName());
-        Drawable rowBackground = ContextCompat.getDrawable(mContext, rowBackgroundId);
+        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                1.0f);
+        LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1.0f);
         for (int row = 0; row < mRows; row++){
-//            ConstraintLayout rowLayout = new ConstraintLayout(mContext);
             LinearLayout rowLayout = new LinearLayout(mContext);
             rowLayout.setId(generateViewId());
-//            rowLayout.setBackground(rowBackground);
             rowLayout.setTag("row"+row);
-            rowLayout.setPadding(0, 0, 0, 0);
-            cardsSpace.addView(rowLayout, new ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT));
+            rowLayout.setLayoutParams(rowParams);
+            cardsSpace.addView(rowLayout);
             for (int col = 0; col < mCols; col++){
-                ImageView card = new ImageView(new ContextThemeWrapper(mContext, R.style.card_style), null, 0);
+                ImageView card = new ImageView(mContext);
                 card.setId(generateViewId());
                 card.setTag("row"+row+"col"+col);
-//                card.setBackground(cardBackground);
-                card.setPadding(0, 0, 0, 0);
-                rowLayout.addView(card);
+                rowLayout.addView(card, cardParams);
             }
         }
-        ConstraintSet constraintRow = new ConstraintSet();
-        for (int row = 0; row < mRows; row++){
-            LinearLayout rowLayout = mRoot.findViewWithTag("row"+row);
-//            if (row == 0){
-//                constraintRow.connect(rowLayout.getId(), ConstraintSet.TOP,
-//                        cardsSpace.getId(), ConstraintSet.TOP, 0);
-//            } else {
-//                constraintRow.connect(rowLayout.getId(), ConstraintSet.TOP,
-//                        mRoot.findViewWithTag("row"+(row-1)).getId(), ConstraintSet.BOTTOM, 0);
-//            }
-//            if (row != mRows -1){
-//                constraintRow.connect(rowLayout.getId(), ConstraintSet.BOTTOM,
-//                        mRoot.findViewWithTag("row"+(row+1)).getId(), ConstraintSet.TOP, 0);
-//            } else {
-//                constraintRow.connect(rowLayout.getId(), ConstraintSet.BOTTOM,
-//                        cardsSpace.getId(), ConstraintSet.BOTTOM, 0);
-//            }
-            constraintRow.connect(rowLayout.getId(), ConstraintSet.START,
-                    cardsSpace.getId(), ConstraintSet.START, 0);
-            constraintRow.connect(rowLayout.getId(), ConstraintSet.END,
-                    cardsSpace.getId(), ConstraintSet.END, 0);
-//            ConstraintSet constraintItems = new ConstraintSet();
-//            constraintItems.clone(rowLayout);
-//            for (int col = 0; col < mCols; col++){
-//                ImageView card = mRoot.findViewWithTag("row"+row+"col"+col);
-//                if (col == 0){
-//                    constraintRow.connect(
-//                            card.getId(),
-//                            ConstraintSet.START,
-//                            rowLayout.getId(),
-//                            ConstraintSet.START, 0);
-//                } else {
-//                    constraintRow.connect(
-//                            card.getId(),
-//                            ConstraintSet.START,
-//                            mRoot.findViewWithTag("row"+row+"col"+(col-1)).getId(),
-//                            ConstraintSet.END, 0);
-//                }
-//                if (col != mCols - 1){
-//                    constraintRow.connect(
-//                            card.getId(),
-//                            ConstraintSet.END,
-//                            mRoot.findViewWithTag("row"+row+"col"+(col+1)).getId(),
-//                            ConstraintSet.START, 0);
-//                } else {
-//                    constraintRow.connect(
-//                            card.getId(),
-//                            ConstraintSet.END,
-//                            rowLayout.getId(),
-//                            ConstraintSet.END, 0);
-//                }
-//            }
-        }
-//        constraintRow.applyTo(cardsSpace);
     }
 
     public long getRows(){
@@ -413,6 +376,7 @@ public class Game {
             }
         }
     }
+
 }
 
 

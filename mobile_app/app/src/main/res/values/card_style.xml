@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="card_style">
-        <item name="android:layout_width">20sp</item>
-        <item name="android:layout_height">20sp</item>
-    </style>
+    <declare-styleable name="card_style">
+        <attr name="android:height" value="20sp" />
+        <attr name="circle_background" format="color" />
+        <attr name="radius_dimen" format="dimension" />
+    </declare-styleable>
 </resources>

@@ -1,15 +1,21 @@
 package com.example.surveyspubdemoapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.surveyspubdemoapp.ui.AdActivity;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -22,9 +28,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+        mInterstitialAds[0] = new InterstitialAd(this);
+        mInterstitialAds[0].setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAds[0].loadAd(new AdRequest.Builder().build());
+            }
+        });
+        mInterstitialAds[0].setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAds[0].loadAd(new AdRequest.Builder().build());
+        mRewardedAds[0] = new RewardedAd(this,
+                "ca-app-pub-3940256099942544/5224354917");
 
     }
 
