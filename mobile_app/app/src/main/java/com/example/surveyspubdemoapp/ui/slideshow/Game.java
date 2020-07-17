@@ -1,6 +1,7 @@
 package com.example.surveyspubdemoapp.ui.slideshow;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
@@ -25,6 +27,9 @@ import com.example.surveyspubdemoapp.ui.AdActivity;
 import com.example.surveyspubdemoapp.ui.Dialog;
 import com.example.surveyspubdemoapp.ui.Tuple;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 import java.io.InputStream;
@@ -47,13 +52,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Game {
-    private static final int LIVES = 3;
+    private static final int EASY_LIVES = 3;
+    private static final int MEDIUM_LIVES = 5;
+    private static final int HARD_LIVES = 7;
+    private int mMaxLives;
     private int mRows = 3;
     private int mCols = 2;
     private static final long DELAY = 1000;
     private static final Tuple EASY = new Tuple(3,2);
     private static final Tuple MEDIUM = new Tuple(4,3);
     private static final Tuple HARD = new Tuple(4,4);
+    private HashMap<Integer, Boolean> mMatchedCards = new HashMap<Integer, Boolean>();
     private Integer mLives;
     public ImageView mTurnedCard;
     private Integer mPairsLeft;
@@ -61,17 +70,8 @@ public class Game {
     private View mRoot;
     private HashMap<Integer, Integer> mCardsImg;
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
-    private RewardedAdLoadCallback mAdLoadCallback = new RewardedAdLoadCallback() {
-        @Override
-        public void onRewardedAdLoaded() {
-            // Ad successfully loaded.
-        }
-
-        @Override
-        public void onRewardedAdFailedToLoad(int errorCode) {
-            // Ad failed to load.
-        }
-    };
+    private RewardedAdLoadCallback mAdLoadCallback;
+    private RewardedAdCallback mAdCallback;
 
 
     public Game(Context context, View root){
@@ -84,7 +84,8 @@ public class Game {
         mCardsImg = new HashMap<>();
         mTurnedCard = null;
         mPairsLeft = mRows * mCols / 2;
-        mLives = LIVES;
+        mMaxLives = EASY_LIVES;
+        mLives = mMaxLives;
         enableDifficultyButtons();
         createCards();
         enableCards();
@@ -106,17 +107,66 @@ public class Game {
             }
         });
         shuffleCards();
+        mAdLoadCallback = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdLoaded() {
+                // Ad successfully loaded.
+                Log.d("onRewardLoaded", "Add Successfully loaded ");
+            }
+
+            @Override
+            public void onRewardedAdFailedToLoad(int errorCode) {
+                // Ad failed to load.
+                Log.d("onRewardedAdFailed", "Error code: " + errorCode);
+            }
+        };
+        mAdCallback = new RewardedAdCallback() {
+            @Override
+            public void onRewardedAdOpened() {
+                // Ad opened.
+            }
+
+            @Override
+            public void onRewardedAdClosed() {
+                ((AdActivity) mContext).mRewardedAds[0] = new RewardedAd(mContext,
+                        "ca-app-pub-3940256099942544/5224354917");
+                ((AdActivity) mContext).mRewardedAds[0].loadAd(new AdRequest.Builder().build(), mAdLoadCallback);            }
+
+            @Override
+            public void onUserEarnedReward(@NonNull RewardItem reward) {
+                mLives = mMaxLives;
+                setLives();
+            }
+
+            @Override
+            public void onRewardedAdFailedToShow(int errorCode) {
+                // Ad failed to display.
+                Log.d("RewardedFailedShow", "Error code: " + errorCode);
+            }
+        };
+        ((AdActivity) mContext).mRewardedAds[0].loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
     }
 
     public void enableCards(){
         for (int row = 0; row < mRows; row += 1) {
             for (int col = 0; col < mCols; col += 1){
-                mRoot.findViewWithTag("row" + row + "col" + col).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v){
-                        onImgClickHandler(v);
-                    }
-                });
+                ImageView card = mRoot.findViewWithTag("row" + row + "col" + col);
+                if (mMatchedCards.containsKey(card.getId())){
+                    card.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v){
+                            onOpenedCardClickHandler(v);
+                        }
+                    });
+                } else {
+                    card.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v){
+                            onImgClickHandler(v);
+                        }
+                    });
+                }
+
             }
         }
     }
@@ -127,9 +177,10 @@ public class Game {
         } else {
             Log.d("TAG", "The interstitial wasn't loaded yet.");
         }
+        mMatchedCards = new HashMap<Integer, Boolean>();
         mTurnedCard = null;
         mPairsLeft = mRows * mCols / 2;
-        mLives = 3;
+        mLives = mMaxLives;
         createCards();
         for (int row = 0; row < mRows; row += 1) {
             for (int col = 0; col < mCols; col += 1){
@@ -141,10 +192,7 @@ public class Game {
                 });
             }
         }
-        for (int i = 0; i < LIVES; i++){
-            View heart = mRoot.findViewWithTag("heart" + i);
-            heart.setVisibility(View.VISIBLE);
-        }
+        setLives();
         shuffleCards();
     }
 
@@ -158,7 +206,6 @@ public class Game {
             return;
         }
         if (mTurnedCard.getId() == button.getId()){
-            openDialog("Oops!", "Don't tap this card again, try getting a matching card");
             return;
         }
         if (!mCardsImg.get(mTurnedCard.getId()).equals(mCardsImg.get(button.getId()))) {
@@ -169,6 +216,8 @@ public class Game {
             mRoot.postDelayed(new WrongCardDelay(this, button), DELAY);
             return;
         }
+        mMatchedCards.put(button.getId(), true);
+        mMatchedCards.put(mTurnedCard.getId(), true);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,7 +236,6 @@ public class Game {
     }
 
     private void onOpenedCardClickHandler(View v){
-        openDialog("Don't worry about this one", "You've already turned this card!");
     }
 
     public void hideCard(ImageView card){
@@ -245,7 +293,12 @@ public class Game {
         if (mLives == 0){
             openDialog("You've lost :(",
                     "Press restart to play again, good luck next time");
-            ((AdActivity) mContext).mRewardedAds[0].loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
+            if (((AdActivity) mContext).mRewardedAds[0].isLoaded()){
+                ((AdActivity) mContext).mRewardedAds[0].show((Activity) mContext, mAdCallback);
+                return;
+            }
+            killCards();
+
             return;
         }
 
@@ -278,7 +331,8 @@ public class Game {
         int heartId = mContext.getResources().getIdentifier("ic_heart", "drawable",
                 mContext.getPackageName());
         LinearLayout livesLayout = mRoot.findViewById(R.id.layout_lives_left);
-        for (int i = 0; i < LIVES; i++){
+        livesLayout.removeAllViews();
+        for (int i = 0; i < mMaxLives; i++){
             ImageView life = new ImageView(mContext);
             life.setImageResource(heartId);
             life.setTag("heart" + i);
@@ -298,6 +352,7 @@ public class Game {
         int radioGroupId = mContext.getResources().getIdentifier("difficulty_selection", "id",
                 mContext.getPackageName());
         RadioGroup radioGroup = mRoot.findViewById(radioGroupId);
+        int maxLives;
         for(int index = 0; index < radioGroup.getChildCount(); index++) {
             RadioButton nextChild = (RadioButton) radioGroup.getChildAt(index);
             final Tuple difficulty;
@@ -312,6 +367,13 @@ public class Game {
                 @Override
                 public void onClick(View view) {
                     RadioButton button = (RadioButton) view;
+                    if (difficulty == EASY){
+                        mMaxLives = EASY_LIVES;
+                    } else if (difficulty == MEDIUM){
+                        mMaxLives = MEDIUM_LIVES;
+                    } else {
+                        mMaxLives = HARD_LIVES;
+                    }
                     if( button.isChecked()) {
                         mRows = (int) difficulty.getFirst();
                         mCols = (int) difficulty.getSecond();
@@ -344,6 +406,7 @@ public class Game {
                 ImageView card = new ImageView(mContext);
                 card.setId(generateViewId());
                 card.setTag("row"+row+"col"+col);
+                card.setPadding(0, 0, 0, 15);
                 rowLayout.addView(card, cardParams);
             }
         }
