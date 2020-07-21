@@ -8,10 +8,8 @@ class CloseMenuButton extends React.Component{
   render(){
     return (
       e('div', {id: 'close_button_container'}, 
-        e( 'button', {id: 'close_menu_button', 
-        onMouseDown: this.props.handleMouseDown},
-        'X'
-        ) 
+        e('img', {id:'close_menu_button', src:'../public/images/close.svg'
+        , onMouseDown: this.props.handleMouseDown})
       )
     );
   }
@@ -21,9 +19,9 @@ class MenuButton extends React.Component {
   render() {
     console.log("Rendered MenuButton");
     return e(
-      'button', 
-      {id : "menu_button", onMouseDown : this.props.handleMouseDown},
-      'Menu'
+      'img', 
+      {id: 'menu_button', onMouseDown:this.props.handleMouseDown, 
+      src:'../public/images/open-menu.svg'}
     );
   }
 }
