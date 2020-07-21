@@ -11,6 +11,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -27,6 +28,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements AdActivity {
 
@@ -50,6 +53,16 @@ public class MainActivity extends AppCompatActivity implements AdActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        String interstitialTest = getResources().getString(R.string.interstitial_test);
+        String interstitial = getResources().getString(R.string.interstitial);
+        String rewardedTest = getResources().getString(R.string.rewarded_test);
+        String rewarded = getResources().getString(R.string.rewarded);
+        String banner = getResources().getString(R.string.banner);
+        String bannerTest = getResources().getString(R.string.banner_test);
+        String deviceId = getResources().getString(R.string.device_id);
+        RequestConfiguration adsConfiguration = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList(deviceId)).build();
+        MobileAds.setRequestConfiguration(adsConfiguration);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -62,10 +75,10 @@ public class MainActivity extends AppCompatActivity implements AdActivity {
                 mInterstitialAds[0].loadAd(new AdRequest.Builder().build());
             }
         });
-        mInterstitialAds[0].setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAds[0].setAdUnitId(interstitial);
         mInterstitialAds[0].loadAd(new AdRequest.Builder().build());
         mRewardedAds[0] = new RewardedAd(this,
-                "ca-app-pub-3940256099942544/5224354917");
+                rewarded);
 
     }
 

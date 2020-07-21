@@ -31,14 +31,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
             </com.google.android.gms.ads.AdView>
-
             <LinearLayout
                 android:id="@+id/layout_lives_left"
                 android:layout_width="match_parent"
                 android:layout_height="30sp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/difficulty_selection"
-                app:layout_constraintTop_toBottomOf="@id/banner01"/>
+                app:layout_constraintTop_toBottomOf="@id/banner01">
+            </LinearLayout>
             <RadioGroup
                 android:id="@+id/difficulty_selection"
                 android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/difficulty_selection"
-                app:layout_constraintBottom_toTopOf="@id/restartButton"
+                app:layout_constraintBottom_toTopOf="@id/ad_configuration"
                 >
 <!--                <LinearLayout-->
 <!--                    android:id="@+id/r1"-->
@@ -206,6 +206,36 @@
 
 <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
+            <LinearLayout
+                android:id="@+id/ad_configuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/cards_space"
+                app:layout_constraintBottom_toBottomOf="@id/restartButton"
+                android:paddingLeft="10sp">
+                <Switch
+                    android:id="@+id/switch_banner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Banner" />
+                <Switch
+                    android:id="@+id/switch_interstitial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Interstitial" />
+                <Switch
+                    android:id="@+id/switch_rewarded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+
+                    android:text="Rewarded" />
+            </LinearLayout>
             <Button
                 android:id="@+id/restartButton"
                 android:layout_width="195dp"
@@ -220,7 +250,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/showButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/row2" />
+                app:layout_constraintTop_toBottomOf="@+id/ad_configuration" />
 
             <Button
                 android:id="@+id/showButton"
@@ -237,7 +267,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/restartButton"
-                app:layout_constraintTop_toBottomOf="@+id/row2"
+                app:layout_constraintTop_toBottomOf="@+id/ad_configuration"
                 app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

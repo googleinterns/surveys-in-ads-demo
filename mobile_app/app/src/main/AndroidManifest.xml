@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        Meta tag to be able to show AdMob ads-->
+<!--        Specifies that the meta tag is to provide the application AdMob ID-->
+<!--        The value attribute is the application AdMob ID-->
         <meta-data
         android:name="com.google.android.gms.ads.APPLICATION_ID"
         android:value="@string/app_admob_id"/>

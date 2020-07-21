@@ -19,6 +19,6 @@ public class Tuple {
         mFirst = o;
     }
     public void setSecond(Object o){
-        mSecond = 0;
+        mSecond = o;
     }
 }
