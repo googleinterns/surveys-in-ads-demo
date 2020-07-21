@@ -14,4 +14,9 @@
     <string name="easy_text">Beginner</string>
     <string name="medium_text">Experienced</string>
     <string name="hard_text">Veteran</string>
+    <string name="banner_switch_text">Banner</string>
+    <string name="interstitial_switch_text">Interstitial</string>
+    <string name="rewarded_switch_text">Rewarded</string>
+    <string name="restart_button_text">Restart</string>
+    <string name="showcards_button_text">End Game</string>
 </resources>

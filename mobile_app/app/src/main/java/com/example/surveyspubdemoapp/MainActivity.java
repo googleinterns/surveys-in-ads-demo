@@ -75,10 +75,9 @@ public class MainActivity extends AppCompatActivity implements AdActivity {
                 mInterstitialAds[0].loadAd(new AdRequest.Builder().build());
             }
         });
-        mInterstitialAds[0].setAdUnitId(interstitial);
-        mInterstitialAds[0].loadAd(new AdRequest.Builder().build());
+        mInterstitialAds[0].setAdUnitId(interstitialTest);
         mRewardedAds[0] = new RewardedAd(this,
-                rewarded);
+                rewardedTest);
 
     }
 

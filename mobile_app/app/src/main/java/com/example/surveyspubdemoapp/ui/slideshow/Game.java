@@ -28,6 +28,7 @@ import com.example.surveyspubdemoapp.R;
 import com.example.surveyspubdemoapp.ui.AdActivity;
 import com.example.surveyspubdemoapp.ui.Dialog;
 import com.example.surveyspubdemoapp.ui.Tuple;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -106,6 +107,7 @@ public class Game {
         enableRestartButton();
         enableShowCardsButton();
         shuffleCards();
+        setUpInterstitialAd();
         setUpRewardedAd();
     }
 //    Enable button  to restart game from scratch
@@ -136,13 +138,11 @@ public class Game {
         mAdLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
-                // Ad successfully loaded.
                 Log.d("onRewardLoaded", "Add Successfully loaded ");
             }
 
             @Override
             public void onRewardedAdFailedToLoad(int errorCode) {
-                // Ad failed to load.
                 Log.d("onRewardedAdFailed", "Error code: " + errorCode);
             }
         };
@@ -171,6 +171,26 @@ public class Game {
             }
         };
         mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
+    }
+
+    private void setUpInterstitialAd(){
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Log.d("onAdFailedToLoad", "Interstitial ad failed to load, error code " + errorCode);
+            }
+
+            @Override
+            public void onAdLoaded() {
+                Log.d("onAdLoaded", "Interstitial ad loaded");
+            }
+        });
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
 //    Restarts the game, set back lives, turns all the cards face-down and sets all the
@@ -326,11 +346,17 @@ public class Game {
                        new CompoundButton.OnCheckedChangeListener() {
                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                mShowBanner = !mShowBanner;
+                               int visibility;
+                               if (mShowBanner){
+                                   visibility = View.VISIBLE;
+                               } else {
+                                   visibility = View.INVISIBLE;
+                               }
                                AdView banner = mRoot.findViewById(mContext.getResources().getIdentifier(
                                        "banner01",
                                        "id",
                                        mContext.getPackageName()));
-                               banner.setVisibility(View.INVISIBLE);
+                               banner.setVisibility(visibility);
             }
         });
         ((Switch) mRoot.findViewById(mContext.getResources().getIdentifier(
@@ -380,7 +406,6 @@ public class Game {
                         }
                     });
                 }
-
             }
         }
     }
