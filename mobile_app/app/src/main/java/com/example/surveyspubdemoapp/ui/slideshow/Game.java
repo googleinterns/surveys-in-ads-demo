@@ -161,7 +161,7 @@ public class Game {
 
           @Override
           public void onRewardedAdClosed() {
-            mRewardedAd = new RewardedAd(mContext, "ca-app-pub-3940256099942544/5224354917");
+            mRewardedAd = new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
             mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
 
@@ -458,12 +458,12 @@ public class Game {
       return;
     }
     if (mLives == 0) {
-      openDialog("You've lost :(", "Press restart to play again, good luck next time");
       killCards();
       if (mShowRewarded && mRewardedAd.isLoaded()) {
         mRewardedAd.show((Activity) mContext, mAdCallback);
         return;
       }
+      openDialog("You've lost", "Press restart to play again");
       return;
     }
   }

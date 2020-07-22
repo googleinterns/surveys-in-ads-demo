@@ -22,7 +22,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_test"
+                ads:adUnitId="@string/banner"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/layout_lives_left"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +104,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
+                    android:switchPadding="0sp"
+                    android:paddingEnd="10sp"
+                    android:paddingRight="10sp"
                     android:text="@string/banner_switch_text" />
                 <Switch
                     android:id="@+id/switch_interstitial"
@@ -111,6 +114,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
+                    android:switchPadding="0sp"
+                    android:paddingEnd="10sp"
+                    android:paddingRight="10sp"
                     android:text="@string/interstitial_switch_text" />
                 <Switch
                     android:id="@+id/switch_rewarded"
@@ -118,6 +124,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
+                    android:switchPadding="0sp"
+                    android:paddingEnd="10sp"
+                    android:paddingRight="10sp"
                     android:text="@string/rewarded_switch_text" />
             </LinearLayout>
             <Button
