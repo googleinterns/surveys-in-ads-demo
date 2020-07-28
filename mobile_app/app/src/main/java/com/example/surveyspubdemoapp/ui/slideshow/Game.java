@@ -106,6 +106,7 @@ public class Game {
     setLives();
     enableRestartButton();
     enableShowCardsButton();
+    enableLoseButton();
     shuffleCards();
     setUpInterstitialAd();
     setUpRewardedAd();
@@ -139,6 +140,23 @@ public class Game {
             });
   }
 
+  private void enableLoseButton(){
+    int loseButtonId =
+            mContext.getResources().getIdentifier("loseButton", "id", mContext.getPackageName());
+    mRoot
+        .findViewById(loseButtonId)
+        .setOnClickListener(
+                new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                    while(mLives > 0){
+                      mLives--;
+                      dropLife();
+                    }
+                    checkEndGame();
+                  }
+                });
+  }
   //  Setup the rewarded ad, creates the Ad Request and loads the ad. Does not show the ad
   private void setUpRewardedAd() {
     mAdLoadCallback =

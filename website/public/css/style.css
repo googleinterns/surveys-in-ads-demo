@@ -81,7 +81,7 @@ body {margin: 0px;}
     height: 315p;
 }
 
-#article_content p,  #article_content h1{
+#article_content p,  #article_content h1, .in-article-ad{
     padding: 0 var(--content_side_padding) 0 var(--content_side_padding);
 }
 
@@ -106,19 +106,9 @@ body {margin: 0px;}
     font-size: 13px;
 }
 
-#banner{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-row: 100%;
-    grid-template-areas: 
-        ". . three . . ";
-    margin-top: var(--bar_top_height);
-    width: 100%;
-}
-
 #banner-ad{
     width: 100%; 
-    grid-area: three;
+    text-align: center;
 }
 
 #right-ad{

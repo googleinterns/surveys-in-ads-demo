@@ -131,7 +131,7 @@
             </LinearLayout>
             <Button
                 android:id="@+id/restartButton"
-                android:layout_width="195dp"
+                android:layout_width="0sp"
                 android:layout_height="54dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -139,14 +139,14 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:text="@string/restart_button_text"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/showButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ad_configuration" />
             <Button
                 android:id="@+id/showButton"
-                android:layout_width="212dp"
+                android:layout_width="0sp"
                 android:layout_height="54dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -154,12 +154,25 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:text="@string/showcards_button_text"
-                android:textSize="25sp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/loseButton"
+                app:layout_constraintStart_toEndOf="@+id/restartButton"
+                app:layout_constraintTop_toBottomOf="@+id/ad_configuration"/>
+            <Button
+                android:id="@+id/loseButton"
+                android:layout_width="0sp"
+                android:layout_height="54dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="@string/lose_button_text"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/restartButton"
-                app:layout_constraintTop_toBottomOf="@+id/ad_configuration"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintStart_toEndOf="@+id/showButton"
+                app:layout_constraintTop_toBottomOf="@+id/ad_configuration" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,16 +26,24 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        AdView mAdView = root.findViewById(R.id.banner01);
-        mAdView.setAdListener(new AdListener() {
+        AdView banner_01 = root.findViewById(R.id.banner01);
+        banner_01.setAdListener(new AdListener() {
                                   @Override
                                   public void onAdFailedToLoad(int errorCode) {
                                       Log.d("onAdFailedToLoad", "This is why: " + errorCode);
                                   }
                               }
         );
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        banner_01.loadAd(new AdRequest.Builder().build());
+        AdView banner_02 = root.findViewById(R.id.banner02);
+        banner_02.setAdListener(new AdListener() {
+                                    @Override
+                                    public void onAdFailedToLoad(int errorCode) {
+                                        Log.d("onAdFailedToLoad", "This is why: " + errorCode);
+                                    }
+                                }
+        );
+        banner_02.loadAd(new AdRequest.Builder().build());
         return root;
     }
 }

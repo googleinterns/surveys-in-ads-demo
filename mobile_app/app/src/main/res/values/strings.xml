@@ -19,4 +19,5 @@
     <string name="rewarded_switch_text">Rewarded</string>
     <string name="restart_button_text">Restart</string>
     <string name="showcards_button_text">End Game</string>
+    <string name="lose_button_text">Lose</string>
 </resources>
