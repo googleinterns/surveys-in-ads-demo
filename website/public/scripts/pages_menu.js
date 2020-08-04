@@ -39,9 +39,9 @@ class Menu extends React.Component {
     return ( 
       e('div', {id: 'flyoutMenu', className: visibility}, 
         e(CloseMenuButton, {handleMouseDown : this.props.handleMouseDown}),
-        e('a', {href: "../index.html"}, 'Home'), 
-        e('a', {href: "page1.html"}, 'Page 1'),
-        e('a', {href: "page2.html"}, 'Page 2'),
+        e('a', {href: "../index.html"}, 'AdSense'), 
+        e('a', {href: "gpt.html"}, 'GPT'),
+        e('a', {href: "pubnet.html"}, 'PubNet'),
       )
     );
   }

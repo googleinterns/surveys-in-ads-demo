@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_game">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.surveyspubdemoapp.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:id="@+id/nav_game"
+        android:name="com.example.surveyspubdemoapp.ui.slideshow.SlideshowFragment"
+        android:label="Game"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_article"
+        android:name="com.example.surveyspubdemoapp.ui.home.ArticleFragment"
+        android:label="@string/menu_article"
         tools:layout="@layout/fragment_home" />
 
     <fragment
@@ -17,9 +23,4 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
-    <fragment
-        android:id="@+id/nav_game"
-        android:name="com.example.surveyspubdemoapp.ui.slideshow.SlideshowFragment"
-        android:label="Game"
-        tools:layout="@layout/fragment_slideshow" />
 </navigation>
