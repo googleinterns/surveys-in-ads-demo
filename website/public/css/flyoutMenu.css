@@ -1,0 +1,97 @@
+@import "responsive.css";
+
+
+#menu_container {
+    width: 80px;
+    height: 100%;
+    order: 10;
+    z-index: 500;
+}
+
+#menu_button {
+    width: var(--menu_button_width);
+    height: var(--menu_button_height);
+    position: relative;
+    margin-top: calc(var(--bar_top_height) * .15);
+    margin-left: calc(var(--bar_top_height) * .15);
+    transition: background-color .2s;
+}
+
+#menu_button:hover {
+    cursor: pointer;
+    background-color: rgb(233, 233, 233);
+    border-radius: 15%;
+}
+
+#menu_button:active {
+    border-style: hidden;
+}
+
+#flyoutMenu {
+    width: var(--flyoutmenu_width);
+    height: 100vh;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform .3s
+                cubic-bezier(0, .52, 0, 1);
+    overflow: scroll;
+    z-index: 1000;
+    margin: 0;
+    border-right: solid;
+    border-color: grey;
+    border-width: 1px;
+    text-align: center;
+  }
+   
+  #flyoutMenu.hide {
+    transform: translate3d(calc(var(--flyoutmenu_width) * (-1)), 0, 0);
+  }
+   
+  #flyoutMenu.show {
+    transform: translate3d(0vw, 0, 0);
+    overflow: hidden;
+  }
+
+  #flyoutMenu a {
+    position: relative;
+    display: inline-block;
+    color: rgb(145, 145, 145);
+    text-decoration: none;
+    width: 100%;
+    height: var(--pages_buttons_height);
+    font-family: 'Verdana';
+    text-justify: center;
+    transition: color .1s, background-color .1s, font-weight .1s;
+    padding-bottom: 5px;
+  }
+   
+  #flyoutMenu a:hover {
+    color: black;
+    font-weight: 550;
+  }
+
+  #close_button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    height: var(--pages_buttons_height);
+  }
+
+  #close_menu_button {
+    position: inline-block;
+    margin: auto 5px auto auto;
+    height: var(--close_button_size);
+    width:  var(--close_button_size);
+    padding: 10px;
+  }
+
+  #close_menu_button:hover {
+    cursor: pointer;
+    transition: background-color .2s;
+    background-color: rgb(233, 233, 233);
+    border-radius: 15%;
+  }
+

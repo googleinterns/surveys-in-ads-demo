@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_admob_id">ca-app-pub-9412660755864381~9336494113</string>
+    <string name="banner_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="rewarded_test">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="interstitial_test">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="interstitial">ca-app-pub-9412660755864381/6239998427</string>
+    <string name="rewarded">ca-app-pub-9412660755864381/4659431242</string>
+    <string name="banner">ca-app-pub-9412660755864381/5500356736</string>
+    <string name="device_id">E1200D315DEA01F16A6132823A89742B</string>
+    <string name="banner_02">ca-app-pub-9412660755864381/7773475902</string>
+</resources>

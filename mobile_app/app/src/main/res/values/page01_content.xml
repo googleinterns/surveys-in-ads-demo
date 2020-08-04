@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="page01_title">A competition to identify bird calls using machine learning </string>
+    <string name="page01_meta">
+        Tom Denton\n
+        Software Engineer, Chrome Media Audio\n
+        Published Jun 16, 2020\n
+    </string>
+    <string name="page01_main">
+        Do you hear the birds chirping outside your window? There are more than 10,000 bird species
+        in the world, and they can be found in nearly every environment, from untouched rainforests
+        to suburbs and cities. Birds play an essential role in nature. They are high up in the food
+        chain and integrate changes occurring at low levels. As such, birds are excellent indicators
+        of deteriorating habitat quality and environmental pollution. However, it’s often easier to
+        hear birds than see them. With proper sound detection and classification, researchers could
+        automatically intuit factors about an area’s quality of life based on a changing bird
+        population.\n\n
+
+        There are already many projects underway to extensively monitor birds by recording natural
+        soundscapes over long periods. However the analysis of these datasets is often done
+        manually, is painstakingly slow, and results are incomplete. Data science may be able
+        to assist, so researchers have turned to large crowdsourced databases of vocal recordings
+        of birds to train AI models.\n\n
+
+        To fully take advantage of these extensive and information-rich sound archives, researchers need
+        good machine listeners to reliably extract as much information as possible to aid
+        data-driven conservation.\n\n
+
+        In partnership with the Cornell Lab of Ornithology, Google’s bioacoustics team—part of our AI
+        for Social Good initiative—is announcing a competition to use machine learning to identify
+        bird calls. In this competition, data scientists will identify a wide variety of bird
+        vocalizations in soundscape recordings. Training audio comes from the Xeno-Canto project,
+        a crowd-sourced collection of thousands of hours of bird sounds from around the world.
+        We’re offering $25,000 in prizes for the best entries, and hosting the competition on
+        Kaggle, the world’s largest data science competition community with more than 4 million
+        members from 194 countries. The competition kicks off today and will last until September
+        2—check out the competition page for more details.\n\n
+
+        If successful, winners of this competition will help researchers better understand changes in
+        habitat quality, levels of pollution, and the effectiveness of restoration efforts.
+        The eventual conservation outcomes could greatly improve the quality of life for many
+        living organisms—birds and human beings included.\n\n
+    </string>
+</resources>
