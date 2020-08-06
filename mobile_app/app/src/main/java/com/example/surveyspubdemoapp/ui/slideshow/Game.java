@@ -169,6 +169,8 @@ public class Game {
           @Override
           public void onRewardedAdFailedToLoad(int errorCode) {
             Log.d("onRewardedAdFailed", "Error code: " + errorCode);
+            mRewardedAd = new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
+            mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
         };
     mAdCallback =
@@ -193,6 +195,8 @@ public class Game {
           @Override
           public void onRewardedAdFailedToShow(int errorCode) {
             Log.d("RewardedFailedShow", "Error code: " + errorCode);
+            mRewardedAd = new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
+            mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
         };
     mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);

@@ -118,12 +118,10 @@ body {margin: 0px;}
 }
 
 #banner {
+    margin-top: var(--bar_top_height);
     text-align: center;
-}
-
-#banner-ad{
-    width: 100%; 
-    text-align: center;
+    max-width: 100%;
+    height: max-content;
 }
 
 #right-ad{
@@ -131,5 +129,9 @@ body {margin: 0px;}
     height: 250px;
 }
 
+#div-gpt-ad-1596639594652-0 {
+    text-align: center;
+    margin: auto;
+}
 
 
