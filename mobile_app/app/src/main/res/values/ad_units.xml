@@ -8,4 +8,7 @@
     <string name="banner">ca-app-pub-9412660755864381/5500356736</string>
     <string name="device_id">E1200D315DEA01F16A6132823A89742B</string>
     <string name="banner_02">ca-app-pub-9412660755864381/7773475902</string>
+    <string name="gpt_smart_banner_01">/22068421158/smart_banner_01</string>
+    <string name="gpt_interstitial">/22068421158/interstitial_01</string>
+    <string name="gpt_interstitial_test">/6499/example/interstitial</string>
 </resources>

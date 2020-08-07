@@ -13,6 +13,9 @@
 <!--        Specifies that the meta tag is to provide the application AdMob ID-->
 <!--        The value attribute is the application AdMob ID-->
         <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true"/>
+        <meta-data
         android:name="com.google.android.gms.ads.APPLICATION_ID"
         android:value="@string/app_admob_id"/>
         <activity

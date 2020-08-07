@@ -20,4 +20,6 @@
     <string name="restart_button_text">Restart</string>
     <string name="showcards_button_text">End Game</string>
     <string name="lose_button_text">Lose</string>
+    <string name="show_interstitial_button">Interstitial</string>
+    <string name="show_rewarded_ad">Rewarded</string>
 </resources>
