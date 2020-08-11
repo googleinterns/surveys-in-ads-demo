@@ -13,6 +13,10 @@
         --menu_button_width: 40px;
         --menu_button_height: 70%;
     }
+    #div-gpt-ad-1596492149866-0{
+        display: none;
+    }
+    
 }
 
 /* Dimensions for tablets */
@@ -31,6 +35,10 @@
         --menu_button_width: 40px;
         --menu_button_height: 70%;
     }
+    #div-gpt-ad-1596492149866-0{
+        display: none;
+    }
+    
 }
 
 /* Dimensions for smartphones */

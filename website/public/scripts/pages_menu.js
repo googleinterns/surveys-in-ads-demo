@@ -41,7 +41,8 @@ class Menu extends React.Component {
         e(CloseMenuButton, {handleMouseDown : this.props.handleMouseDown}),
         e('a', {href: "../index.html"}, 'AdSense'), 
         e('a', {href: "gpt.html"}, 'GPT'),
-        e('a', {href: "pubnet.html"}, 'PubNet'),
+        e('a', {href: "opinion_rewards.html"}, 'Opinion Rewards'),
+        e('a', {href: "rewarded_web.html"}, 'Rewarded Web')
       )
     );
   }

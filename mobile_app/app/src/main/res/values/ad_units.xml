@@ -11,4 +11,6 @@
     <string name="gpt_smart_banner_01">/22068421158/smart_banner_01</string>
     <string name="gpt_interstitial">/22068421158/interstitial_01</string>
     <string name="gpt_interstitial_test">/6499/example/interstitial</string>
+    <string name="gpt_168x28">/22068421158/01</string>
+    <string name="gpt_banner_test">/6499/example/banner</string>
 </resources>

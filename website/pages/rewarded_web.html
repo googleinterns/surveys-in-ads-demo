@@ -6,49 +6,56 @@
         <link rel="stylesheet" href="../public/css/style.css" type="text/css">
         <link rel="stylesheet" href="../public/css/flyoutMenu.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=lfhaege4tmt23hdnwfvp6emfva"></script>
-        <script data-ad-client="ca-pub-9412660755864381" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script src="../public/scripts/ad_scripts.js"></script>
-        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
         <script>
-        window.googletag = window.googletag || {cmd: []};
-        googletag.cmd.push(function() {
-            googletag.defineSlot('/22068421158/01', [168, 28], 'div-gpt-ad-1596492149866-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
+            console.log("Making rewarded ad video");
+            
+            googletag = window.googletag || {cmd: []};
+            
+            googletag.cmd.push(function() {
+            const rewardedSlot = googletag.defineOutOfPageSlot(
+            '/1234/main/top',
+            googletag.enums.OutOfPageFormat.REWARDED)
+            .addService(googletag.pubads());
+            console.log("2nd");
+            googletag.pubads().enableAsyncRendering();
+     
             googletag.enableServices();
-        });
-        </script>
-        <script>
-        window.googletag = window.googletag || {cmd: []};
-        googletag.cmd.push(function() {
-            googletag.defineSlot('/22068421158/interstitial_01', [MISSING_WIDTH, MISSING_HEIGHT], 'div-gpt-ad-1597081334488-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-        });
-        </script>
-        <script>
-          window.googletag = window.googletag || {cmd: []};
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/22068421158/responsive_01', [[168, 42], [216, 54], [300, 75], [120, 30], [468, 60]], 'div-gpt-ad-1597081393427-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
+     
+            googletag.pubads().addEventListener('rewardedSlotReady',
+            function(evt) {
+            console.log("Rewarded slot ready");
+              if (confirm('want to see a rewarded ad?')) {
+                console.log("Clicked yes to watch ad");
+                evt.makeRewardedVisible();
+     
+              } else {
+                console.log("Chose not to watch ad");
+                SlotManager.destroySlots([rewardedSlot]);
+     
+              }
+     
+            });
+     
+            googletag.pubads().addEventListener('rewardedSlotGranted',
+            function(evt) {
+                console.log("Rewarded granted");
+              alert('granted! ' + JSON.stringify(evt.payload));
+     
+            });
+     
+            googletag.pubads().addEventListener('rewardedSlotCanceled',
+            function(evt) {
+                console.log("Reward canceled by user");
+              alert('canceled by the user!');
+     
+            });
+     
+            googletag.display(rewardedSlot);
+            console.log("End of rewarded ad video script");
+     
           });
-        </script>
-        <script>
-          window.googletag = window.googletag || {cmd: []};
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/22068421158/fluid_01', ['fluid'], 'div-gpt-ad-1597081421167-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-          });
-        </script>
-        <script>
-          window.googletag = window.googletag || {cmd: []};
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/22068421158/native_01', [MISSING_WIDTH, MISSING_HEIGHT], 'div-gpt-ad-1597081451545-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.enableServices();
-          });
+     
         </script>
         
     </head>
@@ -59,45 +66,10 @@
             <p id="page_name"><a href="../index.html">Generic News Website</a></p>
         </div>
         <div id="banner">
-            <!-- /22068421158/01 -->
-            <div id='div-gpt-ad-1596492149866-0' style='width: 168px; height: 28px;'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1596492149866-0'); });
-                </script>
-            </div>
-            <!-- /22068421158/interstitial_01 -->
-            <div id='div-gpt-ad-1597081334488-0'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1597081334488-0'); });
-                </script>
-            </div>
-            <!-- /22068421158/responsive_01 -->
-            <div id='div-gpt-ad-1597081393427-0'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1597081393427-0'); });
-                </script>
-            </div>
-            <!-- /22068421158/fluid_01 -->
-            <div id='div-gpt-ad-1597081421167-0'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1597081421167-0'); });
-                </script>
-            </div>
-            <!-- /22068421158/native_01 -->
-            <div id='div-gpt-ad-1597081451545-0'>
-                <script>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1597081451545-0'); });
-                </script>
-            </div>
         </div>
         <div id="main_grid">
             <div class="main_region" id="left">
                 <div id="left-ad">
-                    <script>
-                        googletag.cmd.push(function() {
-                          googletag.display('left-ad');
-                        });
-                      </script>
                 </div>
             </div>
             <div class="main_region" id="article_content">

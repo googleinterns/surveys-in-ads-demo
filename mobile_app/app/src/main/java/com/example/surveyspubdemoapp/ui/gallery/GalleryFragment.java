@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.surveyspubdemoapp.R;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
@@ -47,27 +50,36 @@ public class GalleryFragment extends Fragment {
 
 
     public void enableGPTBannerAd(View root){
-        mPublisherAdView = root.findViewById(R.id.banner01);
+        LinearLayout container = root.findViewById(R.id.banner_container);
+//        mPublisherAdView.setAdSizes(new AdSize(168, 28));
+        String ad_168x28 = getResources().getString(R.string.gpt_168x28);
+        String gpt_banner_test = getResources().getString(R.string.gpt_banner_test);
+        String smart_banner = getResources().getString(R.string.gpt_smart_banner_01);
+        mPublisherAdView  = new PublisherAdView(getActivity());
+//        mPublisherAdView.setAdSizes(new AdSize(168, 28));
+        mPublisherAdView.setAdSizes(AdSize.SMART_BANNER);
+        mPublisherAdView.setAdUnitId(smart_banner);
         mPublisherAdView.loadAd(new PublisherAdRequest.Builder().build());
         mPublisherAdView.setAdListener(new AdListener() {
             @Override
-            public void onAdFailedToLoad(int adError) {
+            public void onAdFailedToLoad(LoadAdError adError) {
                 // Code to be executed when an ad request fails.
                 mPublisherAdView.loadAd(new PublisherAdRequest.Builder().build());
 
             }
         });
+        container.addView(mPublisherAdView);
     }
 
     public void enableGPTInterstitialAd(View root){
         String interstitial = getResources().getString(R.string.gpt_interstitial);
         String interstitial_test = getResources().getString(R.string.gpt_interstitial_test);
         mPublisherInterstitialAd = new PublisherInterstitialAd(getActivity());
-        mPublisherInterstitialAd.setAdUnitId(interstitial_test);
+        mPublisherInterstitialAd.setAdUnitId(interstitial);
         mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
         mPublisherInterstitialAd.setAdListener(new AdListener() {
             @Override
-            public void onAdFailedToLoad(int adError) {
+            public void onAdFailedToLoad(LoadAdError adError) {
                 // Code to be executed when an ad request fails.
                 mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
             }
