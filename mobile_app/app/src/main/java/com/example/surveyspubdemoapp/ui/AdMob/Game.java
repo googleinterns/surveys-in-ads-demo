@@ -1,17 +1,10 @@
-package com.example.surveyspubdemoapp.ui.slideshow;
+package com.example.surveyspubdemoapp.ui.AdMob;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.nfc.Tag;
 import android.util.Log;
-import android.util.Pair;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -19,9 +12,6 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.surveyspubdemoapp.R;
@@ -37,22 +27,11 @@ import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
-import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Handler;
-import androidx.appcompat.app.AppCompatActivity;
 
 // This class handles the memory game. It uses the WrongCardDelay class and the HideCard classes
 // for UI delays in some cases.
@@ -140,22 +119,22 @@ public class Game {
             });
   }
 
-  private void enableLoseButton(){
+  private void enableLoseButton() {
     int loseButtonId =
-            mContext.getResources().getIdentifier("loseButton", "id", mContext.getPackageName());
+        mContext.getResources().getIdentifier("loseButton", "id", mContext.getPackageName());
     mRoot
         .findViewById(loseButtonId)
         .setOnClickListener(
-                new View.OnClickListener() {
-                  @Override
-                  public void onClick(View view) {
-                    while(mLives > 0){
-                      mLives--;
-                      dropLife();
-                    }
-                    checkEndGame();
-                  }
-                });
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                while (mLives > 0) {
+                  mLives--;
+                  dropLife();
+                }
+                checkEndGame();
+              }
+            });
   }
   //  Setup the rewarded ad, creates the Ad Request and loads the ad. Does not show the ad
   private void setUpRewardedAd() {
@@ -175,12 +154,12 @@ public class Game {
     mAdCallback =
         new RewardedAdCallback() {
           @Override
-          public void onRewardedAdOpened() {
-          }
+          public void onRewardedAdOpened() {}
 
           @Override
           public void onRewardedAdClosed() {
-            mRewardedAd = new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
+            mRewardedAd =
+                new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
             mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
 

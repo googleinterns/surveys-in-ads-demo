@@ -1,6 +1,5 @@
-package com.example.surveyspubdemoapp.ui.slideshow;
+package com.example.surveyspubdemoapp.ui.AdMob;
 
-import android.content.Context;
 import android.view.View;
 
 public class EnableCards implements Runnable {

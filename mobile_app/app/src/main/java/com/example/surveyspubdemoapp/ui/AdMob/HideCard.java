@@ -1,4 +1,4 @@
-package com.example.surveyspubdemoapp.ui.slideshow;
+package com.example.surveyspubdemoapp.ui.AdMob;
 
 import android.widget.ImageView;
 import com.example.surveyspubdemoapp.R;

@@ -5,7 +5,7 @@
     android:id="@+id/game_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.slideshow.SlideshowFragment">
+    tools:context=".ui.AdMob.AdMobFragment">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:text="@string/restart_button_text"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/showButton"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +154,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:text="@string/showcards_button_text"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/loseButton"
                 app:layout_constraintStart_toEndOf="@+id/restartButton"
@@ -169,7 +169,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:text="@string/lose_button_text"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/showButton"
