@@ -8,6 +8,39 @@
     <link rel="stylesheet" href="../public/css/style.css" type="text/css">
     <link rel="stylesheet" href="../public/css/flyoutMenu.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        googletag = window.googletag || { cmd: [] };
+        googletag.cmd.push(() => {
+            const rewardedSlot = googletag.defineOutOfPageSlot(
+                '/22068421158/interstitial_01',
+                googletag.enums.OutOfPageFormat.REWARDED)
+                .addService(googletag.pubads());
+            googletag.pubads().enableAsyncRendering();
+            googletag.enableServices();
+            console.log("Out of page slot defined");
+            googletag.pubads().addEventListener('rewardedSlotReady',
+                function (evt) {
+                    console.log("Rewarded slot ready");
+                    if (confirm('want to see a rewarded ad?')) {
+                        evt.makeRewardedVisible();
+                    } else {
+                        SlotManager.destroySlots([rewardedSlot]);
+                    }
+                });
+            googletag.pubads().addEventListener('rewardedSlotGranted',
+                function (evt) {
+                    console.log("Rewarded slot granted");
+                    alert('granted! ' + JSON.stringify(evt.payload));
+                });
+            googletag.pubads().addEventListener('rewardedSlotCanceled',
+                function (evt) {
+                    alert('canceled by the user!');
+                });
+            googletag.display(rewardedSlot);
+            console.log("Rewarded slot displayed");
+        });
+    </script>
 </head>
 
 <body>
@@ -17,43 +50,6 @@
         <p id="page_name"><a href="../index.html">Generic News Website</a></p>
     </div>
     <div id="banner" class="rewarded_container">
-        <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
-        <script>
-            console.log("Making rewarded ad video");
-            googletag = window.googletag || { cmd: [] };
-            googletag.cmd.push(function () {
-                const rewardedSlot = googletag.defineOutOfPageSlot(
-                    '/22068421158/interstitial_01',
-                    googletag.enums.OutOfPageFormat.REWARDED)
-                    .addService(googletag.pubads());
-                console.log("2nd");
-                googletag.pubads().enableAsyncRendering();
-                googletag.enableServices();
-                googletag.pubads().addEventListener('rewardedSlotReady',
-                    function (evt) {
-                        console.log("Rewarded slot ready");
-                        if (confirm('want to see a rewarded ad?')) {
-                            console.log("Clicked yes to watch ad");
-                            evt.makeRewardedVisible();
-                        } else {
-                            console.log("Chose not to watch ad");
-                            SlotManager.destroySlots([rewardedSlot]);
-                        }
-                    });
-                googletag.pubads().addEventListener('rewardedSlotGranted',
-                    function (evt) {
-                        console.log("Rewarded granted");
-                        alert('granted! ' + JSON.stringify(evt.payload));
-                    });
-                googletag.pubads().addEventListener('rewardedSlotCanceled',
-                    function (evt) {
-                        console.log("Reward canceled by user");
-                        alert('canceled by the user!');
-                    });
-                googletag.display(rewardedSlot);
-                console.log("End of rewarded ad video script");
-            });
-        </script>
     </div>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>

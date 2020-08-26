@@ -20,6 +20,8 @@ import com.example.surveyspubdemoapp.ui.Dialog;
 import com.example.surveyspubdemoapp.ui.Tuple;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.rewarded.RewardItem;
@@ -146,8 +148,10 @@ public class Game {
           }
 
           @Override
-          public void onRewardedAdFailedToLoad(int errorCode) {
+          public void onRewardedAdFailedToLoad(LoadAdError errorCode) {
             Log.d("onRewardedAdFailed", "Error code: " + errorCode);
+            mRewardedAd =
+                    new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
             mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
         };
@@ -171,7 +175,7 @@ public class Game {
           }
 
           @Override
-          public void onRewardedAdFailedToShow(int errorCode) {
+          public void onRewardedAdFailedToShow(AdError errorCode) {
             Log.d("RewardedFailedShow", "Error code: " + errorCode);
             mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
@@ -189,7 +193,7 @@ public class Game {
           }
 
           @Override
-          public void onAdFailedToLoad(int errorCode) {
+          public void onAdFailedToLoad(LoadAdError errorCode) {
             Log.d("onAdFailedToLoad", "Interstitial ad failed to load, error code " + errorCode);
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
           }

@@ -50,7 +50,7 @@ public class AdManagerFragment extends Fragment {
     mPublisherAdView = new PublisherAdView(getActivity());
     //        mPublisherAdView.setAdSizes(new AdSize(168, 28));
     mPublisherAdView.setAdSizes(AdSize.SMART_BANNER);
-    mPublisherAdView.setAdUnitId(smart_banner);
+    mPublisherAdView.setAdUnitId(gpt_banner_test);
     mPublisherAdView.loadAd(new PublisherAdRequest.Builder().build());
     mPublisherAdView.setAdListener(
         new AdListener() {
@@ -67,7 +67,7 @@ public class AdManagerFragment extends Fragment {
     String interstitial = getResources().getString(R.string.gpt_interstitial);
     String interstitial_test = getResources().getString(R.string.gpt_interstitial_test);
     mPublisherInterstitialAd = new PublisherInterstitialAd(getActivity());
-    mPublisherInterstitialAd.setAdUnitId(interstitial);
+    mPublisherInterstitialAd.setAdUnitId(interstitial_test);
     mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
     mPublisherInterstitialAd.setAdListener(
         new AdListener() {
@@ -95,7 +95,7 @@ public class AdManagerFragment extends Fragment {
           }
 
           @Override
-          public void onRewardedAdFailedToLoad(int adError) {
+          public void onRewardedAdFailedToLoad(LoadAdError adError) {
             // Ad failed to load.
             mRewardedAd = new RewardedAd(getActivity(), "/6499/example/rewarded-video");
             mRewardedAd.loadAd(new PublisherAdRequest.Builder().build(), mAdLoadCallback);
