@@ -39,6 +39,7 @@ class Menu extends React.Component {
         e('a', {href: "../index.html"}, 'AdSense'), 
         e('a', {href: "gpt.html"}, 'GPT'),
         e('a', {href: "pubnet.html"}, 'PubNet'),
+        e('a', {href: "websat.html"}, 'Web Satisfaction'),
         e('a', {href: "rewarded_web.html"}, 'Rewarded Web')
       )
     );
