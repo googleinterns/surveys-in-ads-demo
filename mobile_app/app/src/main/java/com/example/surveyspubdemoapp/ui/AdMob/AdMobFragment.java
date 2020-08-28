@@ -15,6 +15,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 
+//Fragment for AdMob ads
 public class AdMobFragment extends Fragment {
   AdView mAdView;
 
@@ -22,6 +23,7 @@ public class AdMobFragment extends Fragment {
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View root = inflater.inflate(R.layout.fragment_admob, container, false);
     mAdView = root.findViewById(R.id.banner01);
+//    Setting up banner ad
     mAdView.setAdListener(
         new AdListener() {
           @Override
@@ -35,6 +37,7 @@ public class AdMobFragment extends Fragment {
     return root;
   }
 
+//  When view is created we need to start the game,which also does everything regarding the ads
   public void onViewCreated(View view, Bundle savedInstanceState) {
     Game game = new Game(getActivity(), view);
     game.run();

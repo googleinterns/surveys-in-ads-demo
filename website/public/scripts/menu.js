@@ -1,4 +1,5 @@
 'use strict';
+// Script for flyout menu for the index.html page ONLY
 
 const e = React.createElement;
 
@@ -36,6 +37,8 @@ class Menu extends React.Component {
     }
     console.log("Rendered Menu");
     console.log("Menu should " + visibility);
+    // Edit the list below to add/remove any pages tjhat might be added or removed
+    // from the website
     return ( 
       e('div', {id: 'flyoutMenu', className: visibility}, 
         e(CloseMenuButton, {handleMouseDown : this.props.handleMouseDown}),

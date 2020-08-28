@@ -29,7 +29,8 @@ public class AdManagerFragment extends Fragment {
   private RewardedAd mRewardedAd;
   private RewardedAdLoadCallback mAdLoadCallback;
   private RewardedAdCallback mAdCallback;
-
+  // First  function called when this fragment starts. Inflates the layout and enables all ads and
+  // their respective buttons
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View root = inflater.inflate(R.layout.fragment_admanager, container, false);
@@ -41,6 +42,8 @@ public class AdManagerFragment extends Fragment {
     return root;
   }
 
+  //    Does everything related to setting up the banner ad (crees the AdView, creates the request
+  //    and loads the ad and sets a listener for when the ad fail to load)
   public void enableGPTBannerAd(View root) {
     LinearLayout container = root.findViewById(R.id.banner_container);
     //        mPublisherAdView.setAdSizes(new AdSize(168, 28));
@@ -62,7 +65,9 @@ public class AdManagerFragment extends Fragment {
         });
     container.addView(mPublisherAdView);
   }
-
+  //    Does everything related to setting up the interstitial ad (crees the AdView, creates the
+  // request,
+  //    loads the ad and sets a listener for when the ad fail to load and for then it is closed)
   public void enableGPTInterstitialAd(View root) {
     String interstitial = getResources().getString(R.string.gpt_interstitial);
     String interstitial_test = getResources().getString(R.string.gpt_interstitial_test);
@@ -84,7 +89,9 @@ public class AdManagerFragment extends Fragment {
           }
         });
   }
-
+  //    Does everything related to setting up the rewarded ad (crees the AdView, creates the
+  // request,
+  //    loads the ad and sets a listener for when the ad fail to load and for then it is closed)
   public void enableGPTRewardedAd(View root) {
     mRewardedAd = new RewardedAd(getActivity(), "/6499/example/rewarded-video");
     mAdLoadCallback =
@@ -118,7 +125,8 @@ public class AdManagerFragment extends Fragment {
         };
     mRewardedAd.loadAd(new PublisherAdRequest.Builder().build(), mAdLoadCallback);
   }
-
+  // Enables the button that triggers the interstitial button, sets up a listener tto trigger the
+  // ad when pressed
   public void enableInterstitialButton(View root) {
     Button b = root.findViewById(R.id.interstitial_button);
     b.setOnClickListener(
@@ -133,7 +141,8 @@ public class AdManagerFragment extends Fragment {
           }
         });
   }
-
+    // Enables the button that triggers the rewarded button, sets up a listener tto trigger the
+    // ad when pressed
   public void enableRewardedButton(View root) {
     Button b = root.findViewById(R.id.rewarded_button);
     b.setOnClickListener(

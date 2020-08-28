@@ -106,7 +106,8 @@ public class Game {
               }
             });
   }
-  //  Enable button to show all the cards in the game and end the current round
+  //  Enable button to show all the cards in the game and end the current round. This triggers the
+  //    interstitial ads
   private void enableShowCardsButton() {
     int showCardsButtonId =
         mContext.getResources().getIdentifier("showButton", "id", mContext.getPackageName());
@@ -120,7 +121,7 @@ public class Game {
               }
             });
   }
-
+  // Enable button to lose automatically, this triggers the rewarded ad
   private void enableLoseButton() {
     int loseButtonId =
         mContext.getResources().getIdentifier("loseButton", "id", mContext.getPackageName());
@@ -151,8 +152,8 @@ public class Game {
           public void onRewardedAdFailedToLoad(LoadAdError errorCode) {
             Log.d("onRewardedAdFailed", "Error code: " + errorCode);
             mRewardedAd =
-                    new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
- mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
+                new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
+            mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
         };
     mAdCallback =
@@ -177,7 +178,8 @@ public class Game {
           @Override
           public void onRewardedAdFailedToShow(AdError errorCode) {
             Log.d("RewardedFailedShow", "Error code: " + errorCode);
-            mRewardedAd = new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
+            mRewardedAd =
+                new RewardedAd(mContext, mContext.getResources().getString(R.string.rewarded));
             mRewardedAd.loadAd(new AdRequest.Builder().build(), mAdLoadCallback);
           }
         };
@@ -210,6 +212,7 @@ public class Game {
   //    Restarts the game, set back lives, turns all the cards face-down and sets all the
   //    parameter to their initial values. Assigns all cards their OnClick functions.
   //    Shuffles the cards and creates a new round.
+  //    The interstitial ad is triggered here
   private void restartGame() {
     if (mShowInterstitial && mInterstitialAd.isLoaded()) {
       mInterstitialAd.show();
@@ -456,6 +459,7 @@ public class Game {
   }
 
   //    Checks if the game should end due to no lives left or if all cards have been matched
+  //    the rewarded ad is triggered here
   public void checkEndGame() {
     if (mPairsLeft == 0) {
       openDialog("Congrats!", "You've found all the matching cards, press restart to play again");

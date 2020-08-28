@@ -1,6 +1,7 @@
 package com.example.surveyspubdemoapp.ui;
 
 import android.animation.ObjectAnimator;
+//Class for tuples of two
 
 public class Tuple {
     private Object mFirst;

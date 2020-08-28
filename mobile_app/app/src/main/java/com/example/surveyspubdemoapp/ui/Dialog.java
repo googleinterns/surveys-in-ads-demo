@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+//Class for creating a pop up dialog box
 public class Dialog extends AppCompatDialogFragment {
 
     private  String message;

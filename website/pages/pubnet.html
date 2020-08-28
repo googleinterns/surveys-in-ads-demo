@@ -1,16 +1,19 @@
 <!DOCTYPE html>
+<!-- This page only contains one PubNet survey that covers the article content -->
 <html>
 
 <head>
     <meta charset="utf-8">
     <title>Survey in ads pub demo</title>
-    <meta name="google-site-verification" content="7xEUyek4ybnqB60IlX0GPs3k-j4e_-BtzexSp5vQei4" />
+    <meta name="google-site-verification"
+        content="7xEUyek4ybnqB60IlX0GPs3k-j4e_-BtzexSp5vQei4" />
     <link rel="stylesheet" href="../public/css/style.css" type="text/css">
     <link rel="stylesheet" href="../public/css/flyoutMenu.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+    <!-- Script to load survey -->
     <script type="text/javascript">
         (function () {
             var ARTICLE_URL = window.location.href;
@@ -40,7 +43,8 @@
                     DATA CENTERS AND INFRASTRUCTURE
                 </p>
                 <h1 id="title">
-                    One percent of Googlers get to visit a data center, but I did
+                    One percent of Googlers get to visit a data center, but I
+                    did
                 </h1>
             </div>
             <div id="article_meta">
@@ -52,6 +56,9 @@
                     Published Jun 30, 2020
                 </p>
             </div>
+            <!-- The premium content starts here, denoted by the class p402_premium
+                None of the content wrapped by this div will be visible until the user
+                answers the survey -->
             <div class="p402_premium" id="main_text">
                 <p>For years I’ve wondered what it’s like behind the protected
                     walls of a Google data center, and I’m not alone. In my job
@@ -98,7 +105,8 @@
                     in the data center, you’re required to swipe your badge,
                     then enter a circle lock, or tubular doorway. You walk into
                     a special "half portal" that checks your badge and scans
-                    your eyes to gain access to the next layer of the data center.
+                    your eyes to gain access to the next layer of the data
+                    center.
                     It prevents tailgating because only one person is allowed
                     in the circle lock at a time.
                 </p>
@@ -114,7 +122,8 @@
                 <img src="../public/images/page02_image3.gif" alt="">
                 <p>
                     Hard drive tracking is important to the security of your
-                    data because hard drives contain encrypted sensitive information.
+                    data because hard drives contain encrypted sensitive
+                    information.
                     Google meticulously tracks the location and status of every
                     hard drive within our data centers—from acquisition to
                     destruction—using barcodes and asset tags. These asset
@@ -139,6 +148,7 @@
                         href="https://blog.google/inside-google/infrastructure/how-data-center-security-works/">
                         Here!</a></p>
             </div>
+            <!-- Script to make the survey visible and hide the premium content -->
             <script type="text/javascript">
                 try { _402_Show(); } catch (e) { }
             </script>
@@ -151,8 +161,11 @@
             </p>
         </div>
     </div>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <!-- Script for flyout menu -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"
+        crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+        crossorigin></script>
     <script src="../public/scripts/pages_menu.js"></script>
 </body>
 
