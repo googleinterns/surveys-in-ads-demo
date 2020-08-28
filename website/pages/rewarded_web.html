@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<!-- '/22068421158/interstitial_01' -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Survey in ads pub demo</title>
+    <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../public/css/flyoutMenu.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        googletag = window.googletag || { cmd: [] };
+        googletag.cmd.push(() => {
+            const rewardedSlot = googletag.defineOutOfPageSlot(
+                '/22068421158/interstitial_01',
+                googletag.enums.OutOfPageFormat.REWARDED)
+                .addService(googletag.pubads());
+            googletag.pubads().enableAsyncRendering();
+            googletag.enableServices();
+            console.log("Out of page slot defined");
+            googletag.pubads().addEventListener('rewardedSlotReady',
+                function (evt) {
+                    console.log("Rewarded slot ready");
+                    if (confirm('want to see a rewarded ad?')) {
+                        evt.makeRewardedVisible();
+                    } else {
+                        SlotManager.destroySlots([rewardedSlot]);
+                    }
+                });
+            googletag.pubads().addEventListener('rewardedSlotGranted',
+                function (evt) {
+                    console.log("Rewarded slot granted");
+                    alert('granted! ' + JSON.stringify(evt.payload));
+                });
+            googletag.pubads().addEventListener('rewardedSlotCanceled',
+                function (evt) {
+                    alert('canceled by the user!');
+                });
+            googletag.display(rewardedSlot);
+            console.log("Rewarded slot displayed");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="main_region sticky" id="top_bar">
+        <div id="menu_container">
+        </div>
+        <p id="page_name"><a href="../index.html">Generic News Website</a></p>
+    </div>
+    <div id="banner" class="rewarded_container">
+    </div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="../public/scripts/pages_menu.js"></script>
+</body>
+
+</html>

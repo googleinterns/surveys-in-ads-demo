@@ -17,7 +17,6 @@ class CloseMenuButton extends React.Component{
 
 class MenuButton extends React.Component {
   render() {
-    console.log("Rendered MenuButton");
     return e(
       'img', 
       {id: 'menu_button', onMouseDown:this.props.handleMouseDown, 
@@ -34,14 +33,14 @@ class Menu extends React.Component {
     if (this.props.menuVisibility) {
       visibility = "show";
     }
-    console.log("Rendered Menu");
-    console.log("Menu should " + visibility);
     return ( 
       e('div', {id: 'flyoutMenu', className: visibility}, 
         e(CloseMenuButton, {handleMouseDown : this.props.handleMouseDown}),
         e('a', {href: "../index.html"}, 'AdSense'), 
         e('a', {href: "gpt.html"}, 'GPT'),
         e('a', {href: "pubnet.html"}, 'PubNet'),
+        e('a', {href: "websat.html"}, 'Web Satisfaction'),
+        e('a', {href: "rewarded_web.html"}, 'Rewarded Web')
       )
     );
   }
@@ -62,7 +61,6 @@ class MenuContainer extends React.Component {
 
   handleMouseDown(e) {
       this.toggleMenu();
-      console.log("clicked");
       e.stopPropagation();
   }
 
@@ -70,11 +68,9 @@ class MenuContainer extends React.Component {
       this.setState({
         visible: !this.state.visible
       });
-      console.log("Visible: "+ this.state.visible);
   }
 
   render() {
-    console.log("Rendered MenuContainer");
     return ([ 
         e(MenuButton, {handleMouseDown: this.handleMouseDown}),
         e(Menu, {handleMouseDown: this.handleMouseDown, 
@@ -85,6 +81,5 @@ class MenuContainer extends React.Component {
 }
 
 
-console.log("Started");
 const domContainer = document.querySelector('#menu_container');
 ReactDOM.render(e(MenuContainer), domContainer);

@@ -1,4 +1,4 @@
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 800px) {
     body {
         --bar_top_height: 45px;
         --content_width: 800px;
@@ -13,10 +13,14 @@
         --menu_button_width: 40px;
         --menu_button_height: 70%;
     }
+    #div-gpt-ad-1596492149866-0 {
+        display: none;
+    }
 }
 
 /* Dimensions for tablets */
-@media only screen and (min-width: 600px) and (max-width: 800px){
+
+@media only screen and (min-width: 600px) and (max-width: 800px) {
     body {
         --bar_top_height: 45px;
         --content_width: 100%;
@@ -31,10 +35,14 @@
         --menu_button_width: 40px;
         --menu_button_height: 70%;
     }
+    #div-gpt-ad-1596492149866-0 {
+        display: none;
+    }
 }
 
 /* Dimensions for smartphones */
-@media only screen and (max-width: 600px){
+
+@media only screen and (max-width: 600px) {
     body {
         --bar_top_height: 35px;
         --content_width: 100%;
