@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements AdActivity {
         });
     mInterstitialAds[0].setAdUnitId(interstitial);
     mRewardedAds[0] = new RewardedAd(this, rewarded);
+    
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      WebView.setWebContentsDebuggingEnabled(true);
+    }
   }
 
   @Override
