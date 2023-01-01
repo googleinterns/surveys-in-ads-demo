@@ -16,7 +16,7 @@
     "react": "^16.13.1",
     "react-gpt": "^2.0.1",
     "react-jsx": "^1.0.0",
-    "webpack": "^4.43.0"
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.10.1"
